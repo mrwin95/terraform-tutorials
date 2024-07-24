@@ -32,3 +32,15 @@ variable "port" {
 variable "region" {
   type = string
 }
+
+variable "load_balancer_arn" {
+  type = string
+}
+
+variable "certificate_arn" {
+  type = string
+}
+
+variable "api_mapping_headers" {
+  type = list([])
+}

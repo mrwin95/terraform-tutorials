@@ -36,3 +36,15 @@ variable "healthy_threshold" {
 variable "interval" {
   type = number
 }
+
+variable "load_balancer_arn" {
+  type = string
+}
+
+variable "certificate_arn" {
+  type = string
+}
+
+variable "api_mapping_headers" {
+  type = list([])
+}

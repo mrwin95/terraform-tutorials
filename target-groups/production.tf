@@ -9,4 +9,6 @@ module "target_groups" {
   port                = var.port
   timeout             = var.timeout
   region              = var.region
+  load_balancer_arn   = var.load_balancer_arn
+  certificate_arn     = var.certificate_arn
 }
