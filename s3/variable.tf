@@ -11,13 +11,15 @@ variable "terraform-dynamodb-table-locks" {
 }
 
 variable "profile_name" {
-  default = var.profile_name
+  type = string
 }
 
 variable "bucket_name" {
-
+  type    = string
+  default = ""
 }
 
 variable "dynamodb_lock_table" {
-
+  type    = string
+  default = ""
 }

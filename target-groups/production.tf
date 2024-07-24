@@ -8,4 +8,5 @@ module "target_groups" {
   path                = "/healthcheck"
   port                = var.port
   timeout             = var.timeout
+  region              = var.region
 }

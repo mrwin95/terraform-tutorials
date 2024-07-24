@@ -1,3 +1,10 @@
+variable "region" {
+
+}
+
+variable "profile_name" {
+
+}
 variable "vpc_id" {
 
 }

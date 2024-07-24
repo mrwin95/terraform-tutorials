@@ -28,3 +28,7 @@ variable "path" {
 variable "port" {
 
 }
+
+variable "region" {
+
+}
