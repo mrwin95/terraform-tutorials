@@ -14,25 +14,25 @@ variable "lht77_ecs_tg" {
 }
 
 variable "unhealthy_threshold" {
-
+  type = number
 }
 
 variable "timeout" {
-
+  type = number
 }
 
 variable "path" {
-
+  type = string
 }
 
 variable "port" {
-
+  type = number
 }
 
 variable "healthy_threshold" {
-
+  type = number
 }
 
 variable "interval" {
-
+  type = number
 }
