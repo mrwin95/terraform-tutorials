@@ -40,3 +40,9 @@ module "ecs_tasks_execution_role" {
   source       = "../certificate/modules/ecs-task-execution-role"
   project_name = module.vpc.project_name
 }
+
+module "acm_certificate" {
+  source            = "../certificate/modules/acm"
+  alternative_names = var.alternative_names
+  domain_name       = var.domain_name
+}
