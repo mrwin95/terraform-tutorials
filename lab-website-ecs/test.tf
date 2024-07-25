@@ -35,3 +35,8 @@ module "security_groups" {
   source = "../certificate/modules/security_groups"
   vpc_id = module.vpc.vpc_id
 }
+
+module "ecs_tasks_execution_role" {
+  source       = "../certificate/modules/ecs-task-execution-role"
+  project_name = module.vpc.project_name
+}
