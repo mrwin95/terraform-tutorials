@@ -46,3 +46,13 @@ module "acm_certificate" {
   alternative_names = var.alternative_names
   domain_name       = var.domain_name
 }
+
+module "alb" {
+  source                = "../certificate/modules/alb"
+  alb_security_group_id = module.security_groups.alb_security_group_id
+  certificate_arn       = module.acm_certificate.certificate_arn
+  public_subnet_az1_id  = module.vpc.public_subnet_az1_id
+  public_subnet_az2_id  = module.vpc.public_subnet_az2_id
+  vpc_id                = module.vpc.vpc_id
+  project_name          = "new-lab"
+}

@@ -2,8 +2,8 @@ resource "aws_alb" "application_load_balancer" {
   name                       = "${var.project_name}-alb"
   internal                   = false
   load_balancer_type         = "application"
-  security_groups            = [var.public_subnet_az1_id, var.public_subnet_az2_id]
-  subnets                    = []
+  security_groups            = [var.alb_security_group_id]
+  subnets                    = [var.public_subnet_az1_id, var.public_subnet_az2_id]
   enable_deletion_protection = true
   tags = {
     "Name" = "${var.project_name}-alb"
@@ -38,12 +38,13 @@ resource "aws_alb_listener" "alb_http_listener" {
   port              = 80
   protocol          = "HTTP"
   default_action {
-    type = "redirect"
-    redirect {
-      port        = 443
-      protocol    = "HTTPS"
-      status_code = "HTTPS_301"
-    }
+    type             = "forward"
+    target_group_arn = aws_alb_target_group.alb_target_group.arn
+    # redirect {
+    #   port        = 443
+    #   protocol    = "HTTPS"
+    #   status_code = "HTTPS_301"
+    # }
   }
 }
 
