@@ -27,3 +27,9 @@ target-groups/terraform.tfvars
 target-groups/terraform.tfstate.backup
 target-groups/.terraform.lock.hcl
 target-groups/terraform.tfstate
+
+lab-website-ecs/.terraform
+lab-website-ecs/terraform.tfvars
+lab-website-ecs/terraform.tfstate.backup
+lab-website-ecs/.terraform.lock.hcl
+lab-website-ecs/terraform.tfstate
