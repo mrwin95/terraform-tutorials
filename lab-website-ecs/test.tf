@@ -30,3 +30,8 @@ module "nat_gateway" {
   vpc_id                     = module.vpc.vpc_id
   aws_internet_gateway       = module.vpc.aws_internet_gateway
 }
+
+module "security_groups" {
+  source = "../certificate/modules/security_groups"
+  vpc_id = module.vpc.vpc_id
+}
