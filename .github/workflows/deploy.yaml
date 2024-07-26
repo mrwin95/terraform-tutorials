@@ -1,0 +1,35 @@
+name: "Terraform CICD Pipeline"
+run-name: ${{github.actor}} has trigger pipeline
+on:
+  push:
+    branches:
+      - "main"
+env:
+  AWS_ACCESS_KEY: ${{secrets.AWS_ACCESS_KEY}}
+  AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+
+jobs:
+  build-infra:
+    name: "terraform-cicd"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+      - name: "Setup Terraform"
+        uses: "hashicorp/setup-terraform@v2"
+      - name: "Terraform Init"
+        id: "Init"
+        run: "terraform init"
+        working-directory: "./lab-website-ecs"
+      - name: "Terraform Validate"
+        id: "Validate"
+        run: "terraform validate"
+        working-directory: "./lab-website-ecs"
+      - name: "Terraform plan"
+        id: "Plan"
+        run: "terraform plan"
+        working-directory: "./lab-website-ecs"
+      - name: "Terraform apply"
+        id: "Apply"
+        run: "terraform apply"
+        working-directory: "./lab-website-ecs"
