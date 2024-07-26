@@ -66,8 +66,8 @@ resource "aws_security_group" "ecs_security_group" {
   description = "enable http/https on port 80/443"
 
   ingress {
-    from_port       = 0
-    to_port         = 0
+    from_port       = 80
+    to_port         = 80
     cidr_blocks     = ["0.0.0.0/0"]
     protocol        = "tcp"
     self            = false
@@ -84,28 +84,6 @@ resource "aws_security_group" "ecs_security_group" {
     security_groups = [aws_security_group.alb_security_group.id]
     description     = "https access"
   }
-  #   ingress = [
-  #     { // http
-  #       from_port        = 0
-  #       to_port          = 0
-  #       cidr_blocks      = ["0.0.0.0/0"]
-  #       protocol         = "tcp"
-  #       self             = false
-  #       security_groups  = [aws_security_group.alb_security_group.id]
-  #       description      = "http access"
-  #       ipv6_cidr_blocks = [""]
-  #     },
-  #     { // http
-  #       from_port        = 443
-  #       to_port          = 443
-  #       cidr_blocks      = ["0.0.0.0/0"]
-  #       protocol         = "tcp"
-  #       self             = false
-  #       security_groups  = [aws_security_group.alb_security_group.id]
-  #       description      = "https access"
-  #       ipv6_cidr_blocks = [""]
-  #     }
-  #   ]
 
   egress {
     from_port   = 0
@@ -113,18 +91,44 @@ resource "aws_security_group" "ecs_security_group" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  #   egress = [
-  #     {
-  #       from_port        = 0
-  #       to_port          = 0
-  #       protocol         = "-1"
-  #       cidr_blocks      = ["0.0.0.0/0"]
-  #       ipv6_cidr_blocks = [""]
-  #     }
-  #   ]
-
   tags = {
     "Name" = "ECS security group"
+  }
+}
+
+resource "aws_security_group" "ec2_security_group" {
+  name        = "ec2_security_grp"
+  vpc_id      = var.vpc_id
+  description = "enable http/https on port 80/443"
+
+  ingress {
+    from_port       = 80
+    to_port         = 80
+    cidr_blocks     = ["0.0.0.0/0"]
+    protocol        = "tcp"
+    self            = false
+    security_groups = [aws_security_group.alb_security_group.id]
+    description     = "http access"
+  }
+
+  ingress {
+    from_port       = 22
+    to_port         = 22
+    cidr_blocks     = [var.ssh_ip_address]
+    protocol        = "tcp"
+    self            = false
+    security_groups = [aws_security_group.alb_security_group.id]
+    description     = "https access"
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    "Name" = "EC2 security group"
   }
 }
 
