@@ -19,12 +19,6 @@ resource "aws_vpc" "vpc" {
 
 // create internet gw and attach to vpc
 
-resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.vpc.id
-  tags = {
-    "Name" = "${var.project_name}-igw"
-  }
-}
 
 // get all avaiable zones in region
 
@@ -81,6 +75,12 @@ resource "aws_route_table" "public_route_table" {
   }
 }
 
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.vpc.id
+  tags = {
+    "Name" = "${var.project_name}-igw"
+  }
+}
 // associate public subnet az1 to public route table
 
 resource "aws_route_table_association" "public_subnet_az1_route_table_association" {
