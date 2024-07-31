@@ -34,6 +34,7 @@ module "nat_gateway" {
 module "security_groups" {
   source = "../certificate/modules/security_groups"
   vpc_id = module.vpc.vpc_id
+  #   ssh_ip_address = ""
 }
 
 module "ecs_tasks_execution_role" {
@@ -55,4 +56,10 @@ module "alb" {
   public_subnet_az2_id  = module.vpc.public_subnet_az2_id
   vpc_id                = module.vpc.vpc_id
   project_name          = "new-lab"
+}
+
+module "ec2" {
+  source = "../certificate/modules/jenkins"
+  vpc_id = module.vpc.vpc_id
+  subnet = module.vpc.public_subnet_az1_id
 }

@@ -1,0 +1,26 @@
+version: 0.2
+
+cache:
+  paths:
+    - "/root/.m2/**/*"
+    - "node_modules/**/*"
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+      nodejs: 14
+    commands:
+      - echo "Installing Maven dependencies..."
+      - mvn install -DskipTests
+      - echo "Installing Node.js dependencies..."
+      - npm install
+  build:
+    commands:
+      - echo "Building the Maven project..."
+      - mvn package
+      - echo "Building the Node.js project..."
+      - npm run build
+artifacts:
+  files:
+    - "**/*"

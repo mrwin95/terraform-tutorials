@@ -1,2 +1,2 @@
 variable "vpc_id" {}
-variable "ssh_ip_address" {}
+# variable "ssh_ip_address" {}
