@@ -33,3 +33,15 @@ lab-website-ecs/terraform.tfvars
 lab-website-ecs/terraform.tfstate.backup
 lab-website-ecs/.terraform.lock.hcl
 lab-website-ecs/terraform.tfstate
+
+devops-tutorials/site1/.terraform
+devops-tutorials/site1/terraform.tfvars
+devops-tutorials/site1/terraform.tfstate.backup
+devops-tutorials/site1/.terraform.lock.hcl
+devops-tutorials/site1/terraform.tfstate
+
+imports/.terraform
+imports/terraform.tfvars
+imports/terraform.tfstate.backup
+imports/.terraform.lock.hcl
+imports/terraform.tfstate

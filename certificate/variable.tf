@@ -16,6 +16,7 @@ variable "terraform-dynamodb-table-locks" {
   type = string
 }
 
-variable "profile_name" {
-  
-}
+variable "profile_name" {}
+
+variable "price_class" {}
+
