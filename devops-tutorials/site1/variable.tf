@@ -9,4 +9,9 @@ variable "vpc_security_group_name" {}
 variable "security_ports" {
   type = set(number)
 }
+variable "tag_value" {
 
+}
+
+variable "iam_role_name" {}
+variable "iam_role_policy_attachment" {}

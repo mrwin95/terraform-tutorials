@@ -4,8 +4,9 @@ resource "aws_instance" "ec2_instance" {
   key_name               = var.key_name
   vpc_security_group_ids = [aws_security_group.ec2_security_group.id]
   user_data              = templatefile("${path.module}/install_template/install.sh", {})
+  iam_instance_profile   = aws_iam_instance_profile.iam_instance_profile.name
   tags = {
-    "Name" = "Jenkins and SonarQube"
+    "Name" = var.tag_value
   }
 
   root_block_device {
@@ -40,4 +41,9 @@ resource "aws_security_group" "ec2_security_group" {
   tags = {
     "Name" = "Jenkins Security Group"
   }
+}
+
+resource "aws_iam_instance_profile" "iam_instance_profile" {
+  name = var.role_name
+  role = var.ec2_role_name
 }

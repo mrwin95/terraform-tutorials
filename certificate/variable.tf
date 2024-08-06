@@ -19,4 +19,7 @@ variable "terraform-dynamodb-table-locks" {
 variable "profile_name" {}
 
 variable "price_class" {}
+# variable "workspace_key_prefix" {
+
+# }
 

@@ -6,3 +6,6 @@ variable "vpc_security_group_name" {}
 variable "security_ports" {
   type = set(number)
 }
+variable "tag_value" {}
+variable "ec2_role_name" {}
+variable "role_name" {}

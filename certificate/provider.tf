@@ -5,6 +5,8 @@ terraform {
     region         = "us-east-1"
     dynamodb_table = "terraform-up-and-running-locks"
     encrypt        = true
+    # workspace_key_prefix = var.workspace_key_prefix
+    # workspaces           = ""
   }
 }
 provider "aws" {
