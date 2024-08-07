@@ -45,3 +45,9 @@ imports/terraform.tfvars
 imports/terraform.tfstate.backup
 imports/.terraform.lock.hcl
 imports/terraform.tfstate
+
+initial-new-site/.terraform
+initial-new-site/terraform.tfvars
+initial-new-site/terraform.tfstate.backup
+initial-new-site/.terraform.lock.hcl
+initial-new-site/terraform.tfstate

@@ -10,7 +10,7 @@ resource "aws_cloudfront_distribution" "cloudfront_distribution" {
   }
 
   enabled             = var.enabled
-  is_ipv6_enabled     = var.is_ipv6_enabled
+  is_ipv6_enabled     = true
   comment             = var.comment
   default_root_object = ""
   default_cache_behavior {
@@ -88,32 +88,17 @@ resource "aws_cloudfront_cache_policy" "cloudfront_cache_policy" {
 
 
 resource "aws_lambda_function" "CloudFrontDefaultIndexForOrigin" {
-  # Configuration will be populated after import
-  # arn:aws:lambda:us-east-1:792248914698:function:CloudFrontDefaultIndexForOrigin
-  arn           = "arn:aws:lambda:us-east-1:792248914698:function:CloudFrontDefaultIndexForOrigin"
-  function_name = "CloudFrontDefaultIndexForOrigin"
-  handler       = "index.handler"
-  id            = "CloudFrontDefaultIndexForOrigin"
-  #   invoke_arn                     = "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:792248914698:function:CloudFrontDefaultIndexForOrigin/invocations"
-  #   last_modified                  = "2024-08-01T14:34:35.000+0000"
-  #   layers                         = []
-  #   memory_size                    = 256
-  package_type = "Zip"
-  #   qualified_arn                  = "arn:aws:lambda:us-east-1:792248914698:function:CloudFrontDefaultIndexForOrigin:132"
-  #   qualified_invoke_arn           = "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:792248914698:function:CloudFrontDefaultIndexForOrigin:132/invocations"
-  #   reserved_concurrent_executions = -1
-  role             = "arn:aws:iam::792248914698:role/service-role/CloudFrontDefaultIndexForOrigin-role-8wmftjrc"
+  # Configuration will be populated after import  
+  arn              = "arn:aws:lambda:us-east-1:${var.account_id}:function:CloudFrontDefaultIndexForOrigin"
+  function_name    = "CloudFrontDefaultIndexForOrigin"
+  handler          = "index.handler"
+  id               = "CloudFrontDefaultIndexForOrigin"
+  package_type     = "Zip"
+  role             = "arn:aws:iam::${var.account_id}:role/service-role/CloudFrontDefaultIndexForOrigin-role-8wmftjrc"
   runtime          = "nodejs16.x"
   skip_destroy     = false
   source_code_size = 3422
-  #   tags             = {}
-  #   tags_all         = {}
-  timeout = 30
-  #   version = "132"
-
-  #   ephemeral_storage {
-  #     size = 512
-  #   }
+  timeout          = 30
 
   logging_config {
     log_format = "Text"

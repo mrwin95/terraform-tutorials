@@ -3,6 +3,10 @@ variable "region" {
   type        = string
   description = "AWS Deployment region"
 }
+# variable "region_site" {
+#   type        = string
+#   description = "AWS Deployment region"
+# }
 
 variable "domain_name" {
   type        = string
