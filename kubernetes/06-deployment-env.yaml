@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu-deployment
+  namespace: alpha
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+        - name: ubuntu
+          image: ubuntu
+          env:
+            - name: ENV1
+              value: "Hello ENV1"
+            - name: ENV2
+              value: "its simple"
+          command: ["sh", "-c", "tail -f /dev/null"]
+
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "64Mi"
+            limits:
+              cpu: "250m"
+              memory: "128Mi"
+      restartPolicy: Always

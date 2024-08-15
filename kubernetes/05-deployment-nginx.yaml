@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: alpha
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      env: staging
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        env: staging
+        tier: frontend
+    spec:
+      containers:
+        - name: image
+          image: nginx
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "64Mi"
+            limits:
+              cpu: "250m"
+              memory: "128Mi"

@@ -51,3 +51,16 @@ initial-new-site/terraform.tfvars
 initial-new-site/terraform.tfstate.backup
 initial-new-site/.terraform.lock.hcl
 initial-new-site/terraform.tfstate
+
+
+datadog/.terraform
+datadog/terraform.tfvars
+datadog/terraform.tfstate.backup
+datadog/.terraform.lock.hcl
+datadog/terraform.tfstate
+
+kubernetes/infra/.terraform
+kubernetes/infra/terraform.tfvars
+kubernetes/infra/terraform.tfstate.backup
+kubernetes/infra/.terraform.lock.hcl
+kubernetes/infra/terraform.tfstate

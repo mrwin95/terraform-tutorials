@@ -1,3 +1,4 @@
-provider "datadog" {
-  api_key = var.datadog_api_key
+provider "aws" {
+  region  = var.region
+  profile = "sam"
 }
