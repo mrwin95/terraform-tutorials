@@ -64,3 +64,9 @@ kubernetes/infra/terraform.tfvars
 kubernetes/infra/terraform.tfstate.backup
 kubernetes/infra/.terraform.lock.hcl
 kubernetes/infra/terraform.tfstate
+
+mumbai-region/.terraform
+mumbai-region/terraform.tfvars
+mumbai-region/terraform.tfstate.backup
+mumbai-region/.terraform.lock.hcl
+mumbai-region/terraform.tfstate
