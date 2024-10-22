@@ -120,25 +120,25 @@ resource "aws_subnet" "private_app_subnet_az2" {
 }
 
 // create private data subnet az1
-resource "aws_subnet" "private_data_subnet_az1" {
-  vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = var.private_data_subnet_az1_cidr
-  availability_zone       = data.aws_availability_zones.zones.names[0]
-  map_public_ip_on_launch = false
-  tags = {
-    "Name" = "Private Data Subnet Az1"
-  }
-}
+# resource "aws_subnet" "private_data_subnet_az1" {
+#   vpc_id                  = aws_vpc.vpc.id
+#   cidr_block              = var.private_data_subnet_az1_cidr
+#   availability_zone       = data.aws_availability_zones.zones.names[0]
+#   map_public_ip_on_launch = false
+#   tags = {
+#     "Name" = "Private Data Subnet Az1"
+#   }
+# }
 
-resource "aws_subnet" "private_data_subnet_az2" {
-  vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = var.private_data_subnet_az2_cidr
-  availability_zone       = data.aws_availability_zones.zones.names[1]
-  map_public_ip_on_launch = false
-  tags = {
-    "Name" = "Private Data Subnet Az2"
-  }
-}
+# resource "aws_subnet" "private_data_subnet_az2" {
+#   vpc_id                  = aws_vpc.vpc.id
+#   cidr_block              = var.private_data_subnet_az2_cidr
+#   availability_zone       = data.aws_availability_zones.zones.names[1]
+#   map_public_ip_on_launch = false
+#   tags = {
+#     "Name" = "Private Data Subnet Az2"
+#   }
+# }
 
 // create attachment to attach to vpc
 
@@ -146,4 +146,64 @@ resource "aws_subnet" "private_data_subnet_az2" {
 #   internet_gateway_id = aws_internet_gateway.igw.id
 #   vpc_id              = aws_vpc.vpc.id
 
+# }
+
+resource "aws_security_group" "peering_conn" {
+  name        = "peering_security_sgr"
+  vpc_id      = aws_vpc.vpc.id
+  description = "enable peering connection"
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["10.100.0.0/16"]
+    protocol    = "-1"
+    self        = false
+    description = "Japan"
+  }
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["10.10.0.0/16"]
+    protocol    = "-1"
+    self        = false
+    description = "Hong Kong"
+  }
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["12.0.0.0/16"]
+    protocol    = "-1"
+    self        = false
+    description = "Mumbai"
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    "Name" = "peering security group"
+  }
+}
+
+# Define DHCP options set
+
+# resource "aws_vpc_dhcp_options" "dhcp_options" {
+#   domain_name         = var.dc_domain
+#   domain_name_servers = [var.dc1_ip, var.dc2_ip]
+#   tags = {
+#     Name = "dhcp-options"
+#   }
+# }
+
+# # Associate the DHCP options set with the VPC
+
+# resource "aws_vpc_dhcp_options_association" "dhcp_association" {
+#   vpc_id          = aws_vpc.vpc.id
+#   dhcp_options_id = aws_vpc_dhcp_options.dhcp_options.id
 # }

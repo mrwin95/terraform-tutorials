@@ -1,0 +1,62 @@
+---
+dc01:
+  hosts: 10.20.0.10
+  vars:
+    ansible_connection: winrm
+    ansible_user: Administrator
+    ansible_password: P@ssword!
+    ansible_winrm_server_cert_validation: ignore
+    ansible_winrm_transport: basic
+---
+name: Create a new domain and new domain controller
+hosts: dc01
+tasks:
+  - name: Install AD-Domain-Services
+    ansible.windows.win_powershell:
+      script: |
+        Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
+
+  - name: Creating mumbai.local
+    ansible.windows.win_powershell:
+      script: |
+
+        $domainProperties = @{
+        DomainName           = "mumbai.local"
+        DomainNetbiosName    = "ANDREYPICADO"
+        ForestMode           = "Win2012R2"
+        DomainMode           = "Win2012R2"
+        CreateDnsDelegation  = $false
+        InstallDns           = $true
+        Force                = $true
+        }
+
+        $SafeModePass = ConvertTo-SecureString "P@ssword01!!!" -AsPlainText -Force
+        Install-ADDSForest @domainProperties -SafeModeAdministratorPassword $SafeModePass
+
+---
+dc02:
+  hosts: 10.20.32.10
+  vars:
+    ansible_connection: winrm
+    ansible_user: Administrator
+    ansible_password: P@ssword!
+    ansible_winrm_server_cert_validation: ignore
+    ansible_winrm_transport: basic
+---
+db1:
+  hosts: 10.20.0.20
+  vars:
+    ansible_connection: winrm
+    ansible_user: Administrator
+    ansible_password: P@ssword!
+    ansible_winrm_server_cert_validation: ignore
+    ansible_winrm_transport: basic
+---
+db2:
+  hosts: 10.20.32.10
+  vars:
+    ansible_connection: winrm
+    ansible_user: Administrator
+    ansible_password: P@ssword!
+    ansible_winrm_server_cert_validation: ignore
+    ansible_winrm_transport: basic

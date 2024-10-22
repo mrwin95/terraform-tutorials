@@ -47,10 +47,10 @@ resource "aws_route_table_association" "private_app_subnet_az1_association" {
   route_table_id = aws_route_table.private_route_table_az1.id
 }
 
-resource "aws_route_table_association" "private_data_subnet_az1_association" {
-  subnet_id      = var.private_data_subnet_az1_id
-  route_table_id = aws_route_table.private_route_table_az1.id
-}
+# resource "aws_route_table_association" "private_data_subnet_az1_association" {
+#   subnet_id      = var.private_data_subnet_az1_id
+#   route_table_id = aws_route_table.private_route_table_az1.id
+# }
 
 resource "aws_route_table" "private_route_table_az2" {
   vpc_id = var.vpc_id
@@ -68,7 +68,7 @@ resource "aws_route_table_association" "private_app_subnet_az2_association" {
   route_table_id = aws_route_table.private_route_table_az2.id
 }
 
-resource "aws_route_table_association" "private_data_subnet_az2_association" {
-  subnet_id      = var.private_data_subnet_az2_id
-  route_table_id = aws_route_table.private_route_table_az2.id
-}
+# resource "aws_route_table_association" "private_data_subnet_az2_association" {
+#   subnet_id      = var.private_data_subnet_az2_id
+#   route_table_id = aws_route_table.private_route_table_az2.id
+# }
