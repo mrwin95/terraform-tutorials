@@ -2,7 +2,7 @@
 
 provider "aws" {
   region  = var.region
-  profile = "sam"
+  profile = "ausan"
 }
 
 module "vpc" {
@@ -51,9 +51,20 @@ module "controller-sg" {
   member_sec_id   = module.member-sg.member-sg-id
 }
 
+module "sql-sg" {
+  source          = "../certificate/modules/security_groups/sql-sg"
+  vpc_id          = module.vpc.vpc_id
+  vpc_cidr_blocks = module.vpc.vpc_cidr
+}
 
-
-
+# module "peering" {
+#   source       = "../certificate/modules/peering"
+#   vpc_a_id     = module.vpc.vpc_id
+#   region_a     = var.region
+#   region_b     = var.region_b
+#   account_b_id = var.account_b_id
+#   vpc_b_id     = var.vpc_b_id
+# }
 # resource "aws_security_group" "ec2_security_group" {
 #   name        = "ec2_security_grp"
 #   vpc_id      = module.vpc.vpc_id

@@ -1,5 +1,5 @@
 region                 = "ap-south-1"
-project_name           = "mumbai_dev"
+project_name           = "mumbai_prod"
 vpc_cidr               = "12.0.0.0/16"
 public_subnet_az1_cidr = "12.0.128.0/20"
 public_subnet_az2_cidr = "12.0.144.0/20"
@@ -17,3 +17,8 @@ dc_domain         = "kenzoo.net"
 
 private_zone1_010  = "12.0.0.10/32"
 private_zone2_1610 = "12.0.16.10/32"
+
+vpc_b_id     = "vpc-067fa0610e0274258"
+region_b     = "ap-east-1"
+account_b_id = "792248914698"
+

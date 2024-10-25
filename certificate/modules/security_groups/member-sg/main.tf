@@ -3,6 +3,9 @@ resource "aws_security_group" "members-sg" {
   name        = "members-mum-sg"
   description = "members-mum-sg"
 
+  tags = {
+    Name = "members-num-sg"
+  }
   ingress {
     from_port   = 0
     to_port     = 0
@@ -115,4 +118,76 @@ resource "aws_security_group" "members-sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
+
+resource "aws_security_group" "controller-sg" {
+  vpc_id      = var.vpc_id
+  name        = "controller-mum-sg"
+  description = "controller-mum-sg"
+  tags = {
+    Name = "controller-mum-sg"
+  }
+  ingress {
+    from_port   = 3389
+    to_port     = 3389
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_cidr_blocks]
+  }
+
+  ingress {
+    from_port   = 5985
+    to_port     = 5985
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_cidr_blocks]
+    description = "WinRM"
+  }
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_cidr_blocks]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  lifecycle {
+    prevent_destroy = true
+    ignore_changes  = [ingress, egress]
+  }
+}
+
+resource "aws_security_group" "sql-sg" {
+  vpc_id      = var.vpc_id
+  name        = "sql-mum-sg"
+  description = "sql-mum-sg"
+
+  tags = {
+    Name = "sql-num-sg"
+  }
+
+  ingress {
+    from_port   = 9182
+    to_port     = 9182
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_cidr_blocks]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  lifecycle {
+    prevent_destroy = true
+    ignore_changes  = [ingress, egress]
+  }
+
 }

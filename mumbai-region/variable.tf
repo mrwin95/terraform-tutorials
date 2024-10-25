@@ -26,3 +26,15 @@ variable "private_zone1_010" {
 variable "private_zone2_1610" {
 
 }
+
+variable "region_b" {
+
+}
+
+variable "vpc_b_id" {
+
+}
+
+variable "account_b_id" {
+
+}
